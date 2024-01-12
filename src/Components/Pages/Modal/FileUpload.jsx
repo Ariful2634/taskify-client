@@ -14,7 +14,7 @@ const FileUpload = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        axios.post('http://localhost:5000/upload', formData)
+        axios.post('https://taskify-server-seven.vercel.app/upload', formData)
             .then(res => alert('File uploaded successfully:', res.data))
             .catch(error => console.error('Error uploading file:', error));
     };

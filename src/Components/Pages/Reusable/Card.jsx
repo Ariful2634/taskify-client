@@ -15,24 +15,12 @@ import { useQuery } from '@tanstack/react-query';
 const Card = () => {
 
 
-    // const [getFile, setGetFile] = useState([])
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:5000/getUploadFile')
-    //         .then(res => {
-    //             setGetFile(res.data.getFile);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching uploaded files:', error);
-    //         });
-
-    // }, [])
     
 
     const {  data: getFile = [] } = useQuery({
         queryKey: ['getFile'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/getUploadFile')
+            const res = await axios.get('https://taskify-server-seven.vercel.app/getUploadFile')
             return res.data.getFile
 
         }
