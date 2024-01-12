@@ -4,12 +4,42 @@ import { TbNotes } from "react-icons/tb";
 import { FaRegCalendarAlt, FaRegComments } from "react-icons/fa";
 import { GrAttachment } from "react-icons/gr";
 import FileUpload from '../Modal/FileUpload';
-// import Modal from '../Modal/Modal';
+import axios from 'axios';
+// import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+
 
 
 
 const Card = () => {
 
+
+    // const [getFile, setGetFile] = useState([])
+
+    // useEffect(() => {
+    //     axios.get('http://localhost:5000/getUploadFile')
+    //         .then(res => {
+    //             setGetFile(res.data.getFile);
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching uploaded files:', error);
+    //         });
+
+    // }, [])
+    
+
+    const {  data: getFile = [] } = useQuery({
+        queryKey: ['getFile'],
+        queryFn: async () => {
+            const res = await axios.get('http://localhost:5000/getUploadFile')
+            return res.data.getFile
+
+        }
+
+    })
+
+    console.log(getFile)
 
 
     return (
@@ -38,7 +68,7 @@ const Card = () => {
                     <img className='w-[30px] rounded-full' src={image} alt="" />
                     <button className="flex items-center btn btn-circle btn-xs">12+</button>
                     <p className='flex items-center gap-1'><FaRegComments></FaRegComments>15</p>
-                    <button className="btn btn-xs mr-2" onClick={() => document.getElementById('my_modal_3').showModal()}> <GrAttachment />25</button>
+                    <button className="btn btn-xs mr-2" onClick={() => document.getElementById('my_modal_3').showModal()}> <GrAttachment />{getFile.length}</button>
                     <dialog id="my_modal_3" className="modal">
                         <div className="modal-box">
                             <form method="dialog">
@@ -46,7 +76,7 @@ const Card = () => {
                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                             </form>
                             <h3 className="font-bold text-lg">Hello!</h3>
-                            
+
                             <FileUpload></FileUpload>
                         </div>
                     </dialog>

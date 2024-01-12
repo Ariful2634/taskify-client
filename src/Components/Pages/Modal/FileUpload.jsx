@@ -14,8 +14,8 @@ const FileUpload = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        axios.post('/api/upload', formData)
-            .then(response => console.log('File uploaded successfully:', response.data))
+        axios.post('http://localhost:5000/upload', formData)
+            .then(res => alert('File uploaded successfully:', res.data))
             .catch(error => console.error('Error uploading file:', error));
     };
 
@@ -34,6 +34,10 @@ const FileUpload = () => {
             </label>
 
             <button className="btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white mt-3" onClick={handleFileUpload}>Upload File</button>
+
+
+            
+
         </div>
     );
 };
